@@ -28,6 +28,7 @@ public class SecurityConfig {
 
     private final UserRepository userRepository;
 
+    
     /**
      * Definisce il bean per il PasswordEncoder utilizzato per criptare le password.
      *
