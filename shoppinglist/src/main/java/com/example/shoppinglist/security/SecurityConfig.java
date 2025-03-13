@@ -7,13 +7,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Configurazione di Spring Security per gestire l'autenticazione e
@@ -48,11 +51,13 @@ public class SecurityConfig {
             if (user == null) {
                 throw new UsernameNotFoundException("Utente non trovato con email: " + email);
             }
+            // Create a GrantedAuthority list using the user's role
+            List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole()));
             // Si crea un oggetto UserDetails con le informazioni dell'utente
             return new org.springframework.security.core.userdetails.User(
                     user.getEmail(),
                     user.getPassword(),
-                    new ArrayList<>() // Lista vuota di ruoli/authorities per semplicità
+                    authorities
             );
         };
     }
@@ -87,6 +92,7 @@ public class SecurityConfig {
                 // accessibili a tutti
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN") // Accesso solo per admin
                         .anyRequest().authenticated())
                 // Configuriamo il form di login
                 .formLogin(form -> form

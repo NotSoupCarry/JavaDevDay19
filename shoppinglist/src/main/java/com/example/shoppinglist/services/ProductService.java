@@ -36,4 +36,9 @@ public class ProductService {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Prodotto non trovato con id: " + id));
     }
+
+    // Nuovo metodo per salvare un prodotto
+    public Product save(Product product) {
+        return productRepository.save(product);
+    }
 }

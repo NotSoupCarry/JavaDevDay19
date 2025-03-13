@@ -25,6 +25,8 @@ public class User {
 
     private String password;
 
+    // Campo per il ruolo (es. "ROLE_USER" o "ROLE_ADMIN")
+    private String role;
     // Mappatura one-to-many: un utente può avere più voci nella lista degli
     // acquisti
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

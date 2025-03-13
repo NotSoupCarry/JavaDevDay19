@@ -7,19 +7,22 @@
 </head>
 
 <body>
-    <h1>Lista Acquisti</h1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Prodotto</th>
-        </tr>
-        <!-- Ciclo per visualizzare gli item della lista acquisti -->
-        <tr th:each="item : ${shoppingList}">
-            <td th:text="${item.id}"></td>
-            <td th:text="${item.product.name}"></td>
-        </tr>
-    </table>
-    <a th:href="@{/products}">Torna alla Lista Prodotti</a>
+    <div style="text-align: center;">
+
+        <h1>Lista Acquisti</h1>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Prodotto</th>
+            </tr>
+            <!-- Ciclo per visualizzare gli item della lista acquisti -->
+            <tr th:each="item : ${shoppingList}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.product.name}"></td>
+            </tr>
+        </table>
+        <a th:href="@{/products}">Torna alla Lista Prodotti</a>
+    </div>
 </body>
 
 </html>

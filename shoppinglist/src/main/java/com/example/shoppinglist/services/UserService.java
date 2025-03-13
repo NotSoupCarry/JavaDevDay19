@@ -24,6 +24,9 @@ public class UserService {
      * @return L'utente registrato
      */
     public User register(User user) {
+        if (user.getRole() == null || user.getRole().isEmpty()) {
+            user.setRole("ROLE_USER");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }

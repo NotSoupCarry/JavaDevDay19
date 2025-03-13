@@ -7,26 +7,29 @@
 </head>
 
 <body>
-    <h1>Lista Prodotti</h1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Prezzo</th>
-            <th>Azione</th>
-        </tr>
-        <!-- Ciclo per visualizzare i prodotti -->
-        <tr th:each="prod : ${products}">
-            <td th:text="${prod.id}"></td>
-            <td th:text="${prod.name}"></td>
-            <td th:text="${prod.price}"></td>
-            <td>
-                <!-- Link per aggiungere il prodotto alla lista acquisti -->
-                <a th:href="@{'/shopping-list/add/' + ${prod.id}}">Aggiungi alla lista</a>
-            </td>
-        </tr>
-    </table>
-    <a th:href="@{/shopping-list}">Visualizza Lista Acquisti</a>
+    <div style="text-align: center;">
+
+        <h1>Lista Prodotti</h1>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Prezzo</th>
+                <th>Azione</th>
+            </tr>
+            <!-- Ciclo per visualizzare i prodotti -->
+            <tr th:each="prod : ${products}">
+                <td th:text="${prod.id}"></td>
+                <td th:text="${prod.name}"></td>
+                <td th:text="${prod.price}"></td>
+                <td>
+                    <!-- Link per aggiungere il prodotto alla lista acquisti -->
+                    <a th:href="@{'/shopping-list/add/' + ${prod.id}}">Aggiungi alla lista</a>
+                </td>
+            </tr>
+        </table>
+        <a th:href="@{/shopping-list}">Visualizza Lista Acquisti</a>
+    </div>
 </body>
 
 <form th:action="@{/auth/logout}" method="post">
